@@ -6,7 +6,7 @@ def main():
     runprocessor()
 
 def runprocessor():
-    loader = ConfigurationLoader({'path': 'resources/configtest.xml'}, 'reading configuration')
+    loader = ConfigurationLoader({'path': 'resources/config.xml'}, 'reading configuration')
     processor = MainProcessor(ExecutorFactory(), loader.load())
     processor.run()
 
