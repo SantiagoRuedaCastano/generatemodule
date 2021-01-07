@@ -3,10 +3,9 @@
 
 En el archivo [resources/config.xml](https://github.com/SantiagoRuedaCastano/generatemodule/blob/main/resources/config.xml) sección <i>process</i> definir el path inicial del proceso.
 
-##Precondiciones
+## Precondiciones
+
 <ul>
-  <il>Python 3.7+</il>
-  <il>Pycharm IDE 2020</il>
- </ul>
-
-
+  <li>Python 3.7+</li>
+  <li>Pycharm IDE 2020</li>
+</ul> 
