@@ -1,5 +1,5 @@
 <config>
-	<process path="D:/test" args="module=ModuleTest;uuaa=xxxx;artifactId=kpis_processing_parent;groupId=com.zzz.yyy;mainclass=MainClass;folderpackage=com/zzz/yyy;package=com.zzz.yyy"/>
+	<process path="" args="module=ModuleTest;uuaa=xxxx;artifactId=kpis_processing_parent;groupId=com.zzz.yyy;mainclass=MainClass;folderpackage=com/zzz/yyy;package=com.zzz.yyy"/>
 	<step order="0" package="executors.DirectoryExecutor" type="DirectoryExecutor">
 		<action order="1" operation="delete" path="${module}/"/>
 	</step>
