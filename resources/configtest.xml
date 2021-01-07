@@ -1,0 +1,66 @@
+<config>
+	<process path="D:/test" args="module=ModuleTest;uuaa=xxxx;artifactId=kpis_processing_parent;groupId=com.zzz.yyy;mainclass=MainClass;folderpackage=com/zzz/yyy;package=com.zzz.yyy"/>
+	<step order="0" package="executors.DirectoryExecutor" type="DirectoryExecutor">
+		<action order="1" operation="delete" path="${module}/"/>
+	</step>
+	<step order="1" package="executors.DirectoryExecutor" type="DirectoryExecutor">
+		<action order="1" operation="create" path="${module}/src/main/resources/config"/>
+		<action order="2" operation="create" path="${module}/src/main/resources/dataproc/processing"/>
+		<action order="3" operation="create" path="${module}/src/main/scala/${folderpackage}/data"/>
+		<action order="4" operation="create" path="${module}/src/main/scala/${folderpackage}/process"/>
+		<action order="5" operation="create" path="${module}/src/test/resources/config"/>
+		<action order="6" operation="create" path="${module}/src/test/resources/inputs"/>
+		<action order="7" operation="create" path="${module}/src/test/resources/schema"/>
+		<action order="8" operation="create" path="${module}/src/test/scala/${folderpackage}/data"/>
+		<action order="9" operation="create" path="${module}/src/test/scala/${folderpackage}/process"/>
+	</step>
+	<step order="2" package="executors.FileExecutor" type="FileExecutor">
+		<action order="1" operation="copy" src="resources/conf/pom.xml" dst="${module}/pom.xml"/>
+		<action order="2" operation="replace_value" src="${module}/pom.xml" oldvalue="module_value" newvalue="${module}"/>
+		<action order="3" operation="replace_value" src="${module}/pom.xml" oldvalue="artifactId_value" newvalue="${artifactId}"/>
+		<action order="4" operation="replace_value" src="${module}/pom.xml" oldvalue="groupId_value" newvalue="${groupId}"/>
+		<action order="5" operation="copy" src="resources/conf/log4j2.properties" dst="${module}/src/test/resources/log4j2.properties"/>
+		<action order="6" operation="copy" src="resources/conf/job_configuration.json" dst="${module}/src/main/resources/dataproc/processing/${uuaa}-co-spk-inm-${module}001.json"/>
+		<action order="7" operation="replace_value" src="${module}/src/main/resources/dataproc/processing/${uuaa}-co-spk-inm-${module}001.json" oldvalue="unitfunctional" newvalue="${uuaa}"/>
+		<action order="8" operation="replace_value" src="${module}/src/main/resources/dataproc/processing/${uuaa}-co-spk-inm-${module}001.json" oldvalue="mainclass_value" newvalue="${mainclass}"/>
+		<action order="9" operation="replace_value" src="${module}/src/main/resources/dataproc/processing/${uuaa}-co-spk-inm-${module}001.json" oldvalue="package_value" newvalue="${package}"/>
+		<action order="10" operation="replace_value" src="${module}/src/main/resources/dataproc/processing/${uuaa}-co-spk-inm-${module}001.json" oldvalue="folderpackage" newvalue="${folderpackage}"/>
+		<action order="11" operation="copy" src="resources/conf/application.conf" dst="${module}/src/main/resources/config/${module}.conf"/>
+		<action order="12" operation="copy" src="resources/conf/application.conf" dst="${module}/src/test/resources/config/${module}Local.conf"/>
+		<action order="13" operation="search_and_replace" src="${module}/" extension="conf" oldvalue="ModuleName" newvalue="${module}"/>
+	</step>
+	<step order="3" package="executors.FileExecutor" type="FileExecutor">
+		<action order="1" operation="copy" src="resources/scala/MainObject.scala" dst="${module}/src/main/scala/${folderpackage}/${module}.scala"/>
+		<action order="2" operation="copy" src="resources/scala/GetDataProcess.scala" dst="${module}/src/main/scala/${folderpackage}/data/GetDataProcess.scala"/>
+		<action order="3" operation="copy" src="resources/scala/PrepareDataProcess.scala" dst="${module}/src/main/scala/${folderpackage}/data/PrepareDataProcess.scala"/>
+		<action order="4" operation="copy" src="resources/scala/GenerateModuleName.scala" dst="${module}/src/main/scala/${folderpackage}/data/Generate${module}.scala"/>
+		<action order="5" operation="copy" src="resources/scala/EvaluateModuleName.scala" dst="${module}/src/main/scala/${folderpackage}/process/Evaluate${module}.scala"/>
+		<action order="6" operation="copy" src="resources/scala/ContextProvider.scala" dst="${module}/src/test/scala/${folderpackage}/ContextProvider.scala"/>
+		<action order="7" operation="copy" src="resources/scala/GetDataProcessTest.scala" dst="${module}/src/test/scala/${folderpackage}/data/GetDataProcessTest.scala"/>
+		<action order="8" operation="copy" src="resources/scala/Parametry.scala" dst="${module}/src/main/scala/${folderpackage}/data/Parametry.scala"/>
+		<action order="9" operation="search_and_replace" src="${module}/" extension="scala" oldvalue="package_value" newvalue="${package}"/>
+		<action order="10" operation="search_and_replace" src="${module}/" extension="scala" oldvalue="ModuleName" newvalue="${module}"/>
+	</step>
+	<step order="4" package="executors.ExcelExecutor" type="ExcelExecutor" workbook="resources/MapFields.xlsx" sheet="Table1">
+		<action order="1" operation="GetDataProcess"
+				src="${module}/src/main/scala/${folderpackage}/data/GetDataProcess.scala"
+				path="${module}/src/test/resources/inputs"
+				configpath="${module}/src/main/resources/config/${module}.conf,${module}/src/test/resources/config/${module}Local.conf"
+				sources_from="A2" sources_to="A4"/>
+		<action order="2" operation="PrepareDataProcess"
+				src="${module}/src/main/scala/${folderpackage}/data/PrepareDataProcess.scala"
+				object_transformation_from="A2" object_transformation_to="A9"/>
+		<action order="3" operation="GenerateLocal"
+				src="${module}/src/main/scala/${folderpackage}/data/Generate${module}.scala"
+				object_joins_from="A13" object_joins_to="A17" sources_from="B13"/>
+		<action order="4" operation="GetDataProcessTest"
+				src="${module}/src/test/scala/${folderpackage}/data/GetDataProcessTest.scala"
+				sources_from="B2" sources_to="B4" inputfields_from="C2"/>
+		<action order="5" operation="Parametry"
+				src="${module}/src/main/scala/${folderpackage}/data/Parametry.scala"
+				sources_from="B2" sources_to="B4" inputfields_from="C2"
+				object_joins_from="A13" object_joins_to="A17" joins_source_from="B13"
+				output_fields_from="E13"
+				object_full_from="A2" object_full_to="A17" sources_full_to="B2"/>
+	</step>
+</config>

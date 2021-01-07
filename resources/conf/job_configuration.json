@@ -1,0 +1,20 @@
+{
+  "configuration": {
+    "params": {
+      "artifactUrl": "${repository.endpoint}/${repository.environment}/folderpackage/ModuleName/${version}/ModuleName-${version}-jar-with-dependencies.jar",
+      "configUrl": "${repository.endpoint}/${repository.environment}/folderpackage/ModuleName/${version}/application.conf",
+      "mainClass": "package_value.mainclass_value",
+      "repoSecurity": "artifactory",
+      "sparkHistoryEnable": "true"
+    },
+    "size": "S"
+  },
+  "description": "Job csag-co-spk-inm-ModuleName-01 created for processing stage",
+  "jobName": "unitfunctional-co-spk-inm-ModuleName-01",
+  "jobVersion": "1.0",
+  "runtime": {
+    "id": "spark",
+    "processing": "batch",
+    "version": "2.2.1"
+  }
+}

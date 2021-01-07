@@ -1,0 +1,74 @@
+<config>
+	<process path="D:/Projects/KPIs/Code/bzvdo_datio_kpis_processing" args="module=kpisLocalSegmentatioFnRet;uuaa=csag"/>
+	<step order="0" package="executors.DirectoryExecutor" type="DirectoryExecutor">
+		<action order="1" operation="delete" path="=[module]/"/>
+	</step>
+	<step order="1" package="executors.DirectoryExecutor" type="DirectoryExecutor">
+		<action order="1" operation="create" path="=[module]/src/main/resources/config"/>
+		<action order="2" operation="create" path="=[module]/src/main/resources/dataproc/processing"/>
+		<action order="3" operation="create" path="=[module]/src/main/scala/com/bbva/datioamproduct/data"/>
+		<action order="4" operation="create" path="=[module]/src/main/scala/com/bbva/datioamproduct/process"/>
+		<action order="5" operation="create" path="=[module]/src/test/resources/config"/>
+		<action order="6" operation="create" path="=[module]/src/test/resources/inputs"/>
+		<action order="7" operation="create" path="=[module]/src/test/resources/schema"/>
+		<action order="8" operation="create" path="=[module]/src/test/scala/com/bbva/datioamproduct/data"/>
+		<action order="9" operation="create" path="=[module]/src/test/scala/com/bbva/datioamproduct/process"/>
+	</step>
+	<step order="2" package="executors.FileExecutor" type="FileExecutor">
+		<action order="1" operation="copy" src="resources/conf/pom.xml" dst="=[module]/pom.xml"/>
+		<action order="2" operation="replace_value" src="=[module]/pom.xml" oldvalue="kpisLocalSegmentationBase" newvalue="=[module]"/>
+		<action order="3" operation="copy" src="resources/conf/log4j2.properties" dst="=[module]/src/test/resources/log4j2.properties"/>
+		<action order="4" operation="copy" src="resources/conf/csag-co-spk-inm-kpislocalsegbase001.json" dst="=[module]/src/main/resources/dataproc/processing/=[uuaa]-co-spk-inm-=[module]001.json"/>
+		<action order="5" operation="replace_value" src="=[module]/src/main/resources/dataproc/processing/=[uuaa]-co-spk-inm-=[module]001.json" oldvalue="kpislocalsegbase" newvalue="=[module]"/>
+		<action order="6" operation="replace_value" src="=[module]/src/main/resources/dataproc/processing/=[uuaa]-co-spk-inm-=[module]001.json" oldvalue="csag" newvalue="=[uuaa]"/>
+		<action order="7" operation="copy" src="resources/conf/cbtqPlInfoPersonas.schema" dst="=[module]/src/test/resources/schema/cbtqPlInfoPersonas.schema"/>
+		<action order="8" operation="copy" src="resources/conf/application.conf" dst="=[module]/src/main/resources/config/application.conf"/>
+		<action order="9" operation="replace_value" src="=[module]/src/main/resources/config/application.conf" oldvalue="kpisLocalSegmentationBase" newvalue="=[module]"/>
+		<action order="10" operation="copy" src="resources/conf/application.conf" dst="=[module]/src/test/resources/config/applicationLocal.conf"/>
+		<action order="11" operation="replace_value" src="=[module]/src/test/resources/config/applicationLocal.conf" oldvalue="kpisLocalSegmentationBase" newvalue="=[module]"/>
+		
+	</step>
+	<step order="3" package="executors.FileExecutor" type="FileExecutor">
+		<action order="1" operation="copy" src="resources/scala/KPISSegmentationBase.scala" dst="=[module]/src/main/scala/com/bbva/datioamproduct/=[module].scala"/>
+        <action order="2" operation="replace_value" src="=[module]/src/main/scala/com/bbva/datioamproduct/=[module].scala" oldvalue="KPISLocalSegmentationBaseTrait" newvalue="=[module]Trait"/>
+        <action order="3" operation="replace_value" src="=[module]/src/main/scala/com/bbva/datioamproduct/=[module].scala" oldvalue="EvaluateSegmentationBase" newvalue="Evaluate=[module]"/>
+        <action order="4" operation="replace_value" src="=[module]/src/main/scala/com/bbva/datioamproduct/=[module].scala" oldvalue="Init process KpisLocalSegmentationBase" newvalue="Init process =[module]"/>
+		<action order="5" operation="copy" src="resources/scala/GetDataProcess.scala" dst="=[module]/src/main/scala/com/bbva/datioamproduct/data/GetDataProcess.scala"/>
+		<action order="6" operation="copy" src="resources/scala/PrepareDataProcess.scala" dst="=[module]/src/main/scala/com/bbva/datioamproduct/data/PrepareDataProcess.scala"/>
+		<action order="7" operation="copy" src="resources/scala/GenerateLocalSegmentationBase.scala" dst="=[module]/src/main/scala/com/bbva/datioamproduct/data/Generate=[module].scala"/>
+		<action order="8" operation="replace_value" src="=[module]/src/main/scala/com/bbva/datioamproduct/data/Generate=[module].scala" oldvalue="GenerateLocalSegmentationBase" newvalue="Generate=[module]"/>
+		<action order="9" operation="copy" src="resources/scala/EvaluateSegmentationBase.scala" dst="=[module]/src/main/scala/com/bbva/datioamproduct/process/Evaluate=[module].scala"/>
+		<action order="10" operation="replace_value" src="=[module]/src/main/scala/com/bbva/datioamproduct/process/Evaluate=[module].scala" oldvalue="SegmentationBase" newvalue="=[module]"/>
+		<action order="11" operation="copy" src="resources/scala/ContextProvider.scala" dst="=[module]/src/test/scala/com/bbva/datioamproduct/ContextProvider.scala"/>
+		<action order="12" operation="copy" src="resources/scala/GetDataProcessTest.scala" dst="=[module]/src/test/scala/com/bbva/datioamproduct/data/GetDataProcessTest.scala"/>
+		<action order="13" operation="copy" src="resources/scala/Parametry.scala" dst="=[module]/src/main/scala/com/bbva/datioamproduct/data/Parametry.scala"/>
+		<action order="14" operation="copy" src="resources/scala/KPISLocalSegmentationBaseTest.scala" dst="=[module]/src/test/scala/com/bbva/datioamproduct/=[module]Test.scala"/>
+		<action order="15" operation="copy" src="resources/scala/PrepareDataProcessTest.scala" dst="=[module]/src/test/scala/com/bbva/datioamproduct/data/PrepareDataProcessTest.scala"/>
+		<action order="16" operation="copy" src="resources/scala/GenerateLocalSegmentationBaseTest.scala" dst="=[module]/src/test/scala/com/bbva/datioamproduct/data/Generate=[module]Test.scala"/>
+		<action order="17" operation="replace_value" src="=[module]/src/test/scala/com/bbva/datioamproduct/data/Generate=[module]Test.scala" oldvalue="GenerateLocalSegmentationBase" newvalue="Generate=[module]"/>
+		<action order="18" operation="copy" src="resources/scala/ParametryTest.scala" dst="=[module]/src/test/scala/com/bbva/datioamproduct/data/ParametryTest.scala"/>
+		<action order="19" operation="copy" src="resources/scala/EvaluateLocalSegmentationBaseTest.scala" dst="=[module]/src/test/scala/com/bbva/datioamproduct/process/EvaluateLocalSegmentationBaseTest.scala"/>
+	</step>
+	<step order="4" package="executors.ExcelExecutor" type="ExcelExecutor" workbook="resources/mapeocampos.xlsx" sheet="t_csag_pl_segmenta_final_return">
+		<action order="1" operation="GetDataProcess"
+				src="=[module]/src/main/scala/com/bbva/datioamproduct/data/GetDataProcess.scala"
+				path="=[module]/src/test/resources/inputs"
+				configpath="=[module]/src/main/resources/config/application.conf,=[module]/src/test/resources/config/applicationLocal.conf"
+				sources_from="C52" sources_to="C54"/>
+		<action order="2" operation="PrepareDataProcess"
+				src="=[module]/src/main/scala/com/bbva/datioamproduct/data/PrepareDataProcess.scala"
+				object_transformation_from="B52" object_transformation_to="B63"/>
+		<action order="3" operation="GenerateLocal"
+				src="=[module]/src/main/scala/com/bbva/datioamproduct/data/Generate=[module].scala"
+				object_joins_from="B68" object_joins_to="B75" sources_from="C68"/>
+		<action order="4" operation="GetDataProcessTest"
+				src="=[module]/src/test/scala/com/bbva/datioamproduct/data/GetDataProcessTest.scala"
+				sources_from="C52" sources_to="C54" inputfields_from="D52"/>
+		<action order="5" operation="Parametry"
+				src="=[module]/src/main/scala/com/bbva/datioamproduct/data/Parametry.scala"
+				sources_from="C52" sources_to="C54" inputfields_from="D52"
+				object_joins_from="B68" object_joins_to="B75" joins_source_from="C68"
+				output_fields_from="F68"
+				object_full_from="B52" object_full_to="B75" sources_full_to="C52"/>
+	</step>
+</config>
