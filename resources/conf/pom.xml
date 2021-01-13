@@ -37,7 +37,7 @@
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bbva.datioamproduct</groupId>
+            <groupId>groupId_value</groupId>
             <artifactId>kpisLocalUtils</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
